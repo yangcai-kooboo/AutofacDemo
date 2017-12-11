@@ -29,16 +29,17 @@ namespace Autofacs
         {
             builder.RegisterType<StudentRepository>().As<IStudentRepository>();
             builder.RegisterType<StudentRepository2>().As<IStudentRepository>();
+            builder.RegisterType<StudentQuery>().As<IStudentQuery>();
 
-            builder.RegisterType<StudentQuery>().As<IStudentQuery>()
-                .WithParameter(new Autofac.Core.ResolvedParameter(
-                    (pi, ctx) => pi.ParameterType == typeof(IStudentRepository[]) && pi.Name == "engines",
-                    (pi, ctx) => new[]
-                    {
-                        ctx.ResolveNamed<IStudentRepository>("StudentRepository1"),
-                        ctx.ResolveNamed<IStudentRepository>("StudentRepository2")
+            //builder.RegisterType<StudentQuery>().As<IStudentQuery>()
+            //    .WithParameter(new Autofac.Core.ResolvedParameter(
+            //        (pi, ctx) => pi.ParameterType == typeof(IStudentRepository[]) && pi.Name == "engines",
+            //        (pi, ctx) => new[]
+            //        {
+            //            ctx.ResolveNamed<IStudentRepository>("StudentRepository1"),
+            //            ctx.ResolveNamed<IStudentRepository>("StudentRepository2")
 
-                    })).InstancePerLifetimeScope();
+            //        })).InstancePerLifetimeScope();
         }
     }
 }
